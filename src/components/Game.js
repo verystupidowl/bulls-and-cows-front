@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Game = () => {
+const Game = (props) => {
     return (
         <div>
-
+            <h2>{props.match.params.id}</h2>
         </div>
     );
 };

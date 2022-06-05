@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 
 
-
 const Login = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [name, setName] = useState('');
 
     const URL = "http://localhost:8080/game/";
@@ -11,15 +9,18 @@ const Login = () => {
     const handleClick = (event) => {
         event.preventDefault();
         const player = {name};
-        console.log(player);
         fetch(
             URL + "addPlayer", {
                 method: "POST",
-                headers: {"Content-Type":"application/json"},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(player)
             }
-        ).then(() => console.log("new player has been added"))
-            .then(() => window.location.assign("/game"));
+        ).then(res => res.json()
+            .then(result => {
+                console.log(result)
+                window.location.assign("menu/" + result.id)
+            })
+        )
     }
     return (
         <div className="Login">

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Login from "./Login";
 import Game from "./Game";
+import Menu from "./Menu";
 
 const InstructorApp = () => {
     return (
@@ -13,7 +14,8 @@ const InstructorApp = () => {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/login" component={Login}/>
-                    <Route exact path="/game" component={Game}/>
+                    <Route exact path="/menu/:id" component={Menu}/>
+                    <Route exact path="/game/:id" component={Game}/>
                 </Switch>
             </BrowserRouter>
         </div>
