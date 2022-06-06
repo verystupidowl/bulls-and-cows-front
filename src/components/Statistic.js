@@ -6,6 +6,7 @@ const Statistic = (props) => {
     const URL = "http://localhost:8080/game/";
     const [player, setPlayer] = useState('');
     let i = 1;
+
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
             .then(res => res.json().then(result => setPlayer(result)))
