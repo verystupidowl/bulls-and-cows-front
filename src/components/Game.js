@@ -29,12 +29,11 @@ const Game = (props) => {
             if (parseInt(answer)) {
                 event.preventDefault();
                 const game = {id, stepCount, time, answer, isGuessed};
-                console.log(game);
                 fetch(URL + "addStepToGame/" + playerId, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(game)
-                }).then(res => res.json().then(result => setGame(result))).then(() => console.log(game))
+                }).then(res => res.json().then(result => setGame(result)))
             } else
                 console.log("nope")
         }

@@ -8,6 +8,7 @@ import Login from "./Login";
 import Game from "./Game";
 import Menu from "./Menu";
 import Statistic from "./Statistic";
+import Main from "./Main";
 
 const InstructorApp = () => {
     return (
@@ -18,6 +19,7 @@ const InstructorApp = () => {
                     <Route exact path="/menu/:id" component={Menu}/>
                     <Route exact path="/game/:id" component={Game}/>
                     <Route exact path="/statistic/:id" component={Statistic}/>
+                    <Route exact path="/" component={Main}/>
                 </Switch>
             </BrowserRouter>
         </div>
