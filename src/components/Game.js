@@ -6,13 +6,13 @@ const Game = (props) => {
         const [game, setGame] = useState('');
         const [answer, setAnswer] = useState('');
         const playerId = props.match.params.id;
-        const rightAnswer = game.answer;
         let stepCount = game.stepCount;
         const time = game.time;
         const id = game.id;
         const isGuessed = game.isGuessed;
+        let i = 1;
 
-        const handleClick = () => {
+        const handleClickStartBtn = () => {
             const startBtn = document.getElementById('start-button');
             const submitBtn = document.getElementById('submit-btn');
             const input = document.getElementById('input');
@@ -26,24 +26,49 @@ const Game = (props) => {
         };
 
         const handleSubmitBtnClick = (event) => {
-            if (parseInt(answer)) {
+            const submitBtn = document.getElementById('submit-btn');
+            const backBtn = document.getElementById('back-btn');
+            if (parseInt(answer) && parseInt(answer).toString().length === 4) {
                 event.preventDefault();
                 const game = {id, stepCount, time, answer, isGuessed};
+                console.log(game);
                 fetch(URL + "addStepToGame/" + playerId, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(game)
-                }).then(res => res.json().then(result => setGame(result)))
+                }).then(res => res.json().then(result => {
+                    console.log(result)
+                    setGame(result)
+                    const trueOrFalse = document.getElementById('true-or-false');
+                    if ((parseInt(result.isGuessed)) === 1) {
+                        const isRight = document.getElementById('is-right')
+                        submitBtn.style.display = "none";
+                        backBtn.style.display = "inline";
+                        if (isRight)
+                            isRight.style.display = "none";
+                    }
+                    trueOrFalse.style.display = "inline";
+                }))
             } else
                 console.log("nope")
         }
 
         return (
             <div>
-                <button onClick={handleClick} id="start-button">
+                <button onClick={handleClickStartBtn} id="start-button">
                     Начать
                 </button>
-                <h2>{rightAnswer}</h2>
+                <br/>
+                {game.steps?.map(step => <div key={step.id}>
+                    <h2 id='is-right'>
+                        {i++ + ') Быки: ' + step.bulls + ' Коровы: ' + step.cows}
+                    </h2>
+                </div>)}
+                <h2 id="true-or-false" style={{display: "none"}}>
+                    {parseInt(isGuessed) === 1 ? 'ВЕРНО! Вы выиграли за ' + stepCount + ' попыток! Ответ: ' + game.answer
+                        : 'Неверно попытка № ' + (game.stepCount)}
+                </h2>
+                <br/>
                 <br/>
                 <form noValidate autoComplete="off">
                     <input value={answer} onChange={event => setAnswer(event.target.value)} id="input"
@@ -52,8 +77,10 @@ const Game = (props) => {
                 <button onClick={handleSubmitBtnClick} id="submit-btn" style={{display: "none"}}>
                     Submit
                 </button>
-                <br/>
-                <h2>{parseInt(isGuessed) === 1 ? 'ВЕРНО' : 'Неверно'}</h2>
+
+                <button onClick={() => window.location.assign("/menu/" + playerId)} id="back-btn" style={{display: "none"}}>
+                    Назад
+                </button>
             </div>
         );
     }
