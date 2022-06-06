@@ -13,10 +13,15 @@ const Statistic = (props) => {
     }, [id, player]);
     const games = player.games;
 
-    if  (player.games?.length === 0) {
+    if (player.games?.length === 0) {
         return (
             <div>
                 <h2>{player.name}, у тебя еще нет игр</h2>
+                <br/>
+                <br/>
+                <button onClick={() => window.location.assign("/menu/" + id)}>
+                    В меню
+                </button>
             </div>
         )
     }
@@ -33,6 +38,9 @@ const Statistic = (props) => {
                     <br/>
                 </div>
             ))}
+            <button onClick={() => window.location.assign("/menu/" + id)}>
+                В меню
+            </button>
         </div>
     );
 };

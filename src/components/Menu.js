@@ -22,6 +22,10 @@ const Menu = (props) => {
             <button onClick={() => window.location.assign("/statistic/" + player.id)}>
                 Статистика
             </button>
+            <br/>
+            <button onClick={() => window.location.assign("/login")}>
+                Выход
+            </button>
         </div>
     );
 };
