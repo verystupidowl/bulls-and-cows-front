@@ -34,7 +34,8 @@ const Statistic = (props) => {
             <p>Твои игры:</p>
             {games?.map(game => (
                 <div key={game.id}>
-                    <p>{i++}) Время: {game.time}; Попыток: {game.stepCount}; Правильный ответ был: {game.answer}</p>
+                    <p>{i++}) Время: {game.time}; Попыток: {game.stepCount}; Правильный ответ
+                        был: {game.rightAnswer}</p>
                     <br/>
                 </div>
             ))}

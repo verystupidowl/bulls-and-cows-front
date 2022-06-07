@@ -9,6 +9,7 @@ const Login = () => {
     const handleClick = (event) => {
         event.preventDefault();
         const player = {name};
+        console.log(player)
         fetch(
             URL + "addPlayer", {
                 method: "POST",
