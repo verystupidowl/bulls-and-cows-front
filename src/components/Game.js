@@ -4,13 +4,14 @@ const Game = (props) => {
 
     const URL = "http://localhost:8080/game/";
     const [game, setGame] = useState('');
-    const [rightAnswer, setRightAnswer] = useState('');
+    const [answer, setAnswer] = useState('');
     const playerId = props.match.params.id;
-    let stepCount = game.stepCount;
-    const time = game.time;
     const id = game.id;
     const isGuessed = game.isGuessed;
     let i = 1;
+    let cows = 0;
+    let bulls = 0;
+    let time = 0;
 
     const handleClickStartBtn = () => {
         const startBtn = document.getElementById('start-button');
@@ -28,14 +29,14 @@ const Game = (props) => {
     const handleSubmitBtnClick = (event) => {
         const submitBtn = document.getElementById('submit-btn');
         const backBtn = document.getElementById('back-btn');
-        if (parseInt(rightAnswer) && parseInt(rightAnswer).toString().length === 4) {
+        if (parseInt(answer) && parseInt(answer).toString().length === 4) {
             event.preventDefault();
-            const game = {id, stepCount, time, rightAnswer, isGuessed};
-            console.log(game);
+            const step = {id, cows, bulls, answer, time};
+            console.log(step);
             fetch(URL + "addStepToGame/" + playerId, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(game)
+                body: JSON.stringify(step)
             }).then(res => res.json().then(result => {
                 console.log(result)
                 setGame(result)
@@ -62,13 +63,13 @@ const Game = (props) => {
                 </h2>
             </div>)}
             <h2 id="true-or-false" style={{display: "none"}}>
-                {parseInt(isGuessed) === 1 ? 'ВЕРНО! Вы выиграли за ' + stepCount + ' попыток! Ответ: ' + game.rightAnswer
-                    : 'Неверно попытка № ' + (game.stepCount)}
+                {parseInt(isGuessed) === 1 ? 'ВЕРНО! Вы выиграли за ' + game.steps.length + ' попыток! Ответ: ' + game.rightAnswer
+                    : 'Неверно попытка № ' + (i)}
             </h2>
             <br/>
             <br/>
             <form noValidate autoComplete="off">
-                <input value={rightAnswer} onChange={event => setRightAnswer(event.target.value)} id="input"
+                <input value={answer} onChange={event => setAnswer(event.target.value)} id="input"
                        style={{display: "none"}}/>
             </form>
             <button onClick={handleSubmitBtnClick} id="submit-btn" style={{display: "none"}}>

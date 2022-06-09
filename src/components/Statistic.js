@@ -6,10 +6,11 @@ const Statistic = (props) => {
     const URL = "http://localhost:8080/game/";
     const [player, setPlayer] = useState('');
     let i = 1;
+    let time = 0;
 
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
-            .then(res => res.json().then(result => setPlayer(result)))
+            .then(res => res.json().then(result => setPlayer(result))).then(() => console.log(player))
     }, [id, player]);
     const games = player.games;
 
@@ -34,8 +35,10 @@ const Statistic = (props) => {
             <p>Твои игры:</p>
             {games?.map(game => (
                 <div key={game.id}>
-                    <p>{i++}) Время: {game.time}; Попыток: {game.stepCount}; Правильный ответ
-                        был: {game.rightAnswer}</p>
+                    <div>{i++}) Время: {game.steps?.map(step => time += step.time, <div key={id}>time</div>)};
+                        Попыток: {game.steps.length};
+                        Правильный ответ
+                        был: {game.rightAnswer}</div>
                     <br/>
                 </div>
             ))}
