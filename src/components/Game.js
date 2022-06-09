@@ -64,7 +64,7 @@ const Game = (props) => {
             </div>)}
             <h2 id="true-or-false" style={{display: "none"}}>
                 {parseInt(isGuessed) === 1 ? 'ВЕРНО! Вы выиграли за ' + game.steps.length + ' попыток! Ответ: ' + game.rightAnswer
-                    : 'Неверно попытка № ' + (i)}
+                    : 'Неверно попытка № ' + i}
             </h2>
             <br/>
             <br/>

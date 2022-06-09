@@ -6,13 +6,17 @@ const Statistic = (props) => {
     const URL = "http://localhost:8080/game/";
     const [player, setPlayer] = useState('');
     let i = 1;
-    let time = 0;
 
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
             .then(res => res.json().then(result => setPlayer(result))).then(() => console.log(player))
     }, [id, player]);
     const games = player.games;
+    const millisecondsToMinuteAndSeconds = (millis) => {
+        let minutes = Math.floor(millis / 60000);
+        let seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    }
 
     if (player.games?.length === 0) {
         return (
@@ -35,7 +39,7 @@ const Statistic = (props) => {
             <p>Твои игры:</p>
             {games?.map(game => (
                 <div key={game.id}>
-                    <div>{i++}) Время: {game.steps?.map(step => time += step.time, <div key={id}>time</div>)};
+                    <div>{i++}) Время: {millisecondsToMinuteAndSeconds(game.steps[game.steps.length - 1].time - game.startTime)};
                         Попыток: {game.steps.length};
                         Правильный ответ
                         был: {game.rightAnswer}</div>
