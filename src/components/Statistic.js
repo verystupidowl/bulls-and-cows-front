@@ -39,7 +39,8 @@ const Statistic = (props) => {
             <p>Твои игры:</p>
             {games?.map(game => (
                 <div key={game.id}>
-                    <div>{i++}) Время: {millisecondsToMinuteAndSeconds(game.steps[game.steps.length - 1].time - game.startTime)};
+                    <div>{i++})
+                        Время: {millisecondsToMinuteAndSeconds(game.steps[game.steps.length - 1].time - game.startTime)};
                         Попыток: {game.steps.length};
                         Правильный ответ
                         был: {game.rightAnswer}</div>

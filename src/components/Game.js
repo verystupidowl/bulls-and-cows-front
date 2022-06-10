@@ -20,7 +20,7 @@ const Game = (props) => {
         fetch(URL + "startGame" + playerId)
             .then(res => res.json()
                 .then(result => setGame(result)))
-            .then(() => console.log(game))
+            .then(() => console.log(game));
         startBtn.style.display = "none";
         submitBtn.style.display = "inline";
         input.style.display = "inline";
