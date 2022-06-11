@@ -17,6 +17,7 @@ const Game = (props) => {
         const startBtn = document.getElementById('start-button');
         const submitBtn = document.getElementById('submit-btn');
         const input = document.getElementById('input');
+        const tutor = document.getElementById('tutor');
         fetch(URL + "startGame" + playerId)
             .then(res => res.json()
                 .then(result => setGame(result)))
@@ -24,6 +25,7 @@ const Game = (props) => {
         startBtn.style.display = "none";
         submitBtn.style.display = "inline";
         input.style.display = "inline";
+        tutor.style.display = "none";
     };
 
     const handleSubmitBtnClick = (event) => {
@@ -53,6 +55,16 @@ const Game = (props) => {
 
     return (
         <div>
+            <div id="tutor">
+                <h2 color="blue">Игра Быки - коровы</h2>
+                <h4>Правила простные: </h4>
+                <h4>Компьютер загадывает число из 4 цифр, твоя задача - угадать!</h4>
+                <h4>Как напишешь свой вариант, получишь число быков и коров</h4>
+                <h4>Количество быков - количество цифр, которые ты угадал точно</h4>
+                <h4>Количество коров - количество цифр, которые ты угадал, но не угадал позицию в числе</h4>
+            </div>
+            <br/>
+            <br/>
             <button onClick={handleClickStartBtn} id="start-button">
                 Начать
             </button>
@@ -66,16 +78,16 @@ const Game = (props) => {
                 {parseInt(isGuessed) === 1 ? 'ВЕРНО! Вы выиграли за ' + game.steps.length + ' попыток! Ответ: ' + game.rightAnswer
                     : 'Неверно попытка № ' + i}
             </h2>
+            <div id="input" style={{display: "none"}}>
+                <h2 color="blue">Число загадано!</h2>
+                <form noValidate autoComplete="off">
+                    <input value={answer} onChange={event => setAnswer(event.target.value)}/>
+                </form>
+            </div>
             <br/>
-            <br/>
-            <form noValidate autoComplete="off">
-                <input value={answer} onChange={event => setAnswer(event.target.value)} id="input"
-                       style={{display: "none"}}/>
-            </form>
             <button onClick={handleSubmitBtnClick} id="submit-btn" style={{display: "none"}}>
                 Submit
             </button>
-
             <div id="back-btn" style={{display: "none"}}>
                 <button onClick={() => window.location.assign("/menu/" + playerId)}>
                     Назад
