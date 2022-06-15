@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useEffect} from "react";
 
 const Game = (props) => {
 
@@ -8,10 +9,17 @@ const Game = (props) => {
     const playerId = props.match.params.id;
     const id = game.id;
     const isGuessed = game.isGuessed;
+    let [timer, setTimer] = useState('');
     let i = 1;
     let cows = 0;
     let bulls = 0;
     let time = 0;
+
+
+    useEffect(() => {
+        fetch(URL + "getTimer" + playerId)
+            .then(res => res.json().then(result => setTimer(result))).then(() => console.log(timer));
+    })
 
     const handleClickStartBtn = () => {
         const startBtn = document.getElementById('start-button');
@@ -27,6 +35,12 @@ const Game = (props) => {
         input.style.display = "inline";
         tutor.style.display = "none";
     };
+
+    const millisecondsToMinuteAndSeconds = (millis) => {
+        let minutes = Math.floor(millis / 60000);
+        let seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    }
 
     const handleSubmitBtnClick = (event) => {
         const submitBtn = document.getElementById('submit-btn');
@@ -51,6 +65,18 @@ const Game = (props) => {
             }))
         } else
             console.log("nope")
+    }
+
+    const timeOut = () => {
+        if (timer <= 0 && parseInt(isGuessed) === 0) {
+            const submitBtn = document.getElementById('submit-btn');
+            const backBtn = document.getElementById('back-btn');
+            if (submitBtn && backBtn) {
+                submitBtn.style.display = "none";
+                backBtn.style.display = "inline";
+            }
+        }
+        return '';
     }
 
     return (
@@ -80,6 +106,7 @@ const Game = (props) => {
             </h2>
             <div id="input" style={{display: "none"}}>
                 <h2 color="blue">Число загадано!</h2>
+                <h2>{timer > 0 && parseInt(isGuessed) === 0 ? 'Осталось: ' + millisecondsToMinuteAndSeconds(timer) : 'Ты не успел!' + timeOut()}</h2>
                 <form noValidate autoComplete="off">
                     <input value={answer} onChange={event => setAnswer(event.target.value)}/>
                 </form>
