@@ -9,17 +9,36 @@ const Game = (props) => {
     const playerId = props.match.params.id;
     const id = game.id;
     const isGuessed = game.isGuessed;
-    let [timer, setTimer] = useState('');
+    let [limitation, setLimitation] = useState('');
     let i = 1;
     let cows = 0;
     let bulls = 0;
     let time = 0;
-
+    const [isStarted, setIsStarted] = useState(false);
 
     useEffect(() => {
         fetch(URL + "getTimer" + playerId)
-            .then(res => res.json().then(result => setTimer(result))).then(() => console.log(timer));
-    })
+            .then(res => res.json().then(result => setLimitation(result))).then(() => {
+            console.log(limitation);
+            if (isStarted && parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
+                const submitBtn = document.getElementById('submit-btn');
+                const backBtn = document.getElementById('back-btn');
+                if (limitation >= 0 && parseInt(isGuessed) === 0) {
+                    if (submitBtn && backBtn) {
+                        submitBtn.style.display = "inline";
+                        backBtn.style.display = "none";
+                    }
+                    return '';
+                } else {
+                    console.log(limitation)
+                    if (submitBtn && backBtn) {
+                        submitBtn.style.display = "none";
+                        backBtn.style.display = "inline";
+                    }
+                }
+            }
+        });
+    });
 
     const handleClickStartBtn = () => {
         const startBtn = document.getElementById('start-button');
@@ -34,12 +53,19 @@ const Game = (props) => {
         submitBtn.style.display = "inline";
         input.style.display = "inline";
         tutor.style.display = "none";
-    };
+        setIsStarted(true);
+    }
 
     const millisecondsToMinuteAndSeconds = (millis) => {
-        let minutes = Math.floor(millis / 60000);
-        let seconds = ((millis % 60000) / 1000).toFixed(0);
-        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+        if (parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
+            if (game.limitation === 'timer') {
+                let minutes = Math.floor(millis / 60000);
+                let seconds = ((millis % 60000) / 1000).toFixed(0);
+                return 'Осталось: ' + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            } else if (game.limitation === 'steps') {
+                return 'Осталось: ' + millis + ' попыток';
+            }
+        } else return '';
     }
 
     const handleSubmitBtnClick = (event) => {
@@ -67,17 +93,14 @@ const Game = (props) => {
             console.log("nope")
     }
 
-    const timeOut = () => {
-        if (timer <= 0 && parseInt(isGuessed) === 0) {
-            const submitBtn = document.getElementById('submit-btn');
-            const backBtn = document.getElementById('back-btn');
-            if (submitBtn && backBtn) {
-                submitBtn.style.display = "none";
-                backBtn.style.display = "inline";
-            }
-        }
-        return '';
-    }
+    // function timeOut() {
+    //     const submitBtn = document.getElementById('submit-btn');
+    //     const backBtn = document.getElementById('back-btn');
+    //     if (submitBtn && backBtn) {
+    //         submitBtn.style.display = "none";
+    //         backBtn.style.display = "inline";
+    //     }
+    // }
 
     return (
         <div>
@@ -106,7 +129,8 @@ const Game = (props) => {
             </h2>
             <div id="input" style={{display: "none"}}>
                 <h2 color="blue">Число загадано!</h2>
-                <h2>{timer > 0 && parseInt(isGuessed) === 0 ? 'Осталось: ' + millisecondsToMinuteAndSeconds(timer) : 'Ты не успел!' + timeOut()}</h2>
+                <h2>{(limitation > 0 || (parseInt(limitation) === -2 || parseInt(limitation) === -3 || parseInt(limitation) === -100))
+                && parseInt(isGuessed) === 0 ? millisecondsToMinuteAndSeconds(limitation) : 'Ты не успел!'}</h2>
                 <form noValidate autoComplete="off">
                     <input value={answer} onChange={event => setAnswer(event.target.value)}/>
                 </form>
@@ -126,6 +150,6 @@ const Game = (props) => {
             </div>
         </div>
     );
-};
+}
 
 export default Game;
