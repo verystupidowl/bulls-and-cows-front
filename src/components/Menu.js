@@ -4,6 +4,16 @@ const Menu = (props) => {
     const id = props.match.params.id;
     const [player, setPlayer] = useState('');
     const URL = "http://localhost:8080/game/";
+
+    const btnStyle = {
+        fontWeight: "700",
+        color: "white",
+        textDecoration: "none",
+        padding: ".2em 1em calc(.2em + 3px)",
+        borderRadius: "3px",
+        background: "rgb(64,199,129)",
+    };
+
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
             .then(res => res.json()
@@ -16,14 +26,14 @@ const Menu = (props) => {
             <h2>Привет, {player.name}!</h2>
             <br/>
             <br/>
-            <button onClick={() => window.location.assign("/game/" + player.id)}>
+            <button style={btnStyle} onClick={() => window.location.assign("/game/" + player.id)}>
                 Играть
             </button>
-            <button onClick={() => window.location.assign("/statistic/" + player.id)}>
+            <button style={btnStyle} onClick={() => window.location.assign("/statistic/" + player.id)}>
                 Статистика
             </button>
             <br/>
-            <button onClick={() => window.location.assign("/login")}>
+            <button style={btnStyle} onClick={() => window.location.assign("/login")}>
                 Выход
             </button>
         </div>

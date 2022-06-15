@@ -16,6 +16,18 @@ const Game = (props) => {
     let time = 0;
     const [isStarted, setIsStarted] = useState(false);
 
+    const inputStyle = {
+        display: "inline",
+        fontFamily: "inherit",
+        fontSize: "1rem",
+        fontWeight: "400",
+        color: "#212529",
+        backgroundColor: "#fff",
+        backgroundClip: "padding-box",
+        border: "1px solid #bdbdbd",
+        borderRadius: "0.25rem",
+    };
+
     useEffect(() => {
         fetch(URL + "getTimer" + playerId)
             .then(res => res.json().then(result => setLimitation(result))).then(() => {
@@ -52,7 +64,7 @@ const Game = (props) => {
         input.style.display = "inline";
         tutor.style.display = "none";
         setIsStarted(true);
-    }
+    };
 
     const millisecondsToMinuteAndSeconds = (millis) => {
         if (parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
@@ -64,7 +76,7 @@ const Game = (props) => {
                 return 'Осталось: ' + millis + ' попыток';
             }
         } else return '';
-    }
+    };
 
     const handleSubmitBtnClick = (event) => {
         const submitBtn = document.getElementById('submit-btn');
@@ -127,13 +139,13 @@ const Game = (props) => {
             </h2>
             <div id="input" style={{display: "none"}}>
                 <h2 style={{color: "blue"}}>Число загадано!</h2>
-                <h2>{(limitation > 0 || (parseInt(limitation) === -2 || parseInt(limitation) === -3 || parseInt(limitation) === -100))
+                <h2 style={{color: "red"}}>{(limitation > 0 || (parseInt(limitation) === -2 || parseInt(limitation) === -3 || parseInt(limitation) === -100))
                 && parseInt(isGuessed) === 0 ? millisecondsToMinuteAndSeconds(limitation) : 'Ты не успел!'}</h2>
                 <div style={{color: "red"}}>
                     {errorChecker()}
                 </div>
                 <form noValidate autoComplete="off">
-                    <input value={answer} onChange={event => setAnswer(event.target.value)}/>
+                    <input value={answer} style={inputStyle} onChange={event => setAnswer(event.target.value)}/>
                 </form>
             </div>
             <br/>

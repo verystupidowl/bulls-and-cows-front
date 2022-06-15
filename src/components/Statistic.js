@@ -7,6 +7,15 @@ const Statistic = (props) => {
     const [player, setPlayer] = useState('');
     let i = 1;
 
+    const btnStyle = {
+        fontWeight: "700",
+        color: "white",
+        textDecoration: "none",
+        padding: ".2em 1em calc(.2em + 3px)",
+        borderRadius: "3px",
+        background: "rgb(64,199,129)",
+    };
+
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
             .then(res => res.json().then(result => setPlayer(result))).then(() => console.log(player))
@@ -52,7 +61,7 @@ const Statistic = (props) => {
                     }
                 </div>
             ))}
-            <button onClick={() => window.location.assign("/menu/" + id)}>
+            <button style={btnStyle} onClick={() => window.location.assign("/menu/" + id)}>
                 В меню
             </button>
         </div>
