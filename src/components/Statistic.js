@@ -44,7 +44,8 @@ const Statistic = (props) => {
                             Время: {millisecondsToMinuteAndSeconds(game.steps[game.steps.length - 1]?.time - game.startTime)};
                             Попыток: {game.steps.length};
                             Правильный ответ
-                            был: {game.rightAnswer}
+                            был: {game.rightAnswer};
+                            Ограничение: {game.limitation}
                             <br/>
                         </div>
                         : ''

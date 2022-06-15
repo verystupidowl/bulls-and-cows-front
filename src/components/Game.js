@@ -92,14 +92,13 @@ const Game = (props) => {
             console.log("nope")
     }
 
-    // function timeOut() {
-    //     const submitBtn = document.getElementById('submit-btn');
-    //     const backBtn = document.getElementById('back-btn');
-    //     if (submitBtn && backBtn) {
-    //         submitBtn.style.display = "none";
-    //         backBtn.style.display = "inline";
-    //     }
-    // }
+    const errorChecker = () => {
+        if (parseInt(answer).toString().length === 4) {
+            return '';
+        } else {
+            return 'Вы можете ввест только четырёхзначное число, которое не начинаетс на 0'
+        }
+    }
 
     return (
         <div>
@@ -124,12 +123,15 @@ const Game = (props) => {
             </div>)}
             <h2 id="true-or-false" style={{display: "none"}}>
                 {parseInt(isGuessed) === 1 ? 'ВЕРНО! Вы выиграли за ' + game.steps.length + ' попыток! Ответ: ' + game.rightAnswer
-                    : 'Неверно попытка № ' + i}
+                    : 'Неверно! Попытка № ' + i}
             </h2>
             <div id="input" style={{display: "none"}}>
-                <h2 color="blue">Число загадано!</h2>
+                <h2 style={{color: "blue"}}>Число загадано!</h2>
                 <h2>{(limitation > 0 || (parseInt(limitation) === -2 || parseInt(limitation) === -3 || parseInt(limitation) === -100))
                 && parseInt(isGuessed) === 0 ? millisecondsToMinuteAndSeconds(limitation) : 'Ты не успел!'}</h2>
+                <div style={{color: "red"}}>
+                    {errorChecker()}
+                </div>
                 <form noValidate autoComplete="off">
                     <input value={answer} onChange={event => setAnswer(event.target.value)}/>
                 </form>
