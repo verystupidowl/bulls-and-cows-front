@@ -19,7 +19,6 @@ const Game = (props) => {
     useEffect(() => {
         fetch(URL + "getTimer" + playerId)
             .then(res => res.json().then(result => setLimitation(result))).then(() => {
-            console.log(limitation);
             if (isStarted && parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
                 const submitBtn = document.getElementById('submit-btn');
                 const backBtn = document.getElementById('back-btn');
@@ -30,7 +29,6 @@ const Game = (props) => {
                     }
                     return '';
                 } else {
-                    console.log(limitation)
                     if (submitBtn && backBtn) {
                         submitBtn.style.display = "none";
                         backBtn.style.display = "inline";
@@ -58,7 +56,7 @@ const Game = (props) => {
 
     const millisecondsToMinuteAndSeconds = (millis) => {
         if (parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
-            if (game.limitation === 'timer') {
+            if (game.limitation === 'time') {
                 let minutes = Math.floor(millis / 60000);
                 let seconds = ((millis % 60000) / 1000).toFixed(0);
                 return 'Осталось: ' + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
@@ -71,10 +69,10 @@ const Game = (props) => {
     const handleSubmitBtnClick = (event) => {
         const submitBtn = document.getElementById('submit-btn');
         const backBtn = document.getElementById('back-btn');
+        const input = document.getElementById('input');
         if (parseInt(answer) && parseInt(answer).toString().length === 4) {
             event.preventDefault();
             const step = {id, cows, bulls, answer, time};
-            console.log(step);
             fetch(URL + "addStepToGame/" + playerId, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -86,6 +84,7 @@ const Game = (props) => {
                 if ((parseInt(result.isGuessed)) === 1) {
                     submitBtn.style.display = "none";
                     backBtn.style.display = "inline";
+                    input.style.display = "none"
                 }
                 trueOrFalse.style.display = "inline";
             }))

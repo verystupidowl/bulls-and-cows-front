@@ -39,15 +39,16 @@ const Statistic = (props) => {
             <p>Твои игры:</p>
             {games?.map(game => (
                 <div key={game.id}>
-                    {game.steps.length > 0?
+                    {game.steps.length > 0 ?
                         <div>{i++})
                             Время: {millisecondsToMinuteAndSeconds(game.steps[game.steps.length - 1]?.time - game.startTime)};
                             Попыток: {game.steps.length};
                             Правильный ответ
-                            был: {game.rightAnswer}</div>
+                            был: {game.rightAnswer}
+                            <br/>
+                        </div>
                         : ''
                     }
-                    <br/>
                 </div>
             ))}
             <button onClick={() => window.location.assign("/menu/" + id)}>
