@@ -28,6 +28,25 @@ const Game = (props) => {
         borderRadius: "0.25rem",
     };
 
+    const btnPositiveStyle = {
+        fontWeight: "700",
+        color: "white",
+        textDecoration: "none",
+        padding: ".2em 1em calc(.2em + 3px)",
+        borderRadius: "3px",
+        background: "rgb(64,199,129)",
+    };
+
+    const btnNegativeStyle = {
+        fontWeight: "700",
+        color: "white",
+        textDecoration: "none",
+        padding: ".2em 1em calc(.2em + 3px)",
+        borderRadius: "3px",
+        background: "rgb(199,64,64)",
+    };
+
+
     useEffect(() => {
         fetch(URL + "getTimer" + playerId)
             .then(res => res.json().then(result => setLimitation(result))).then(() => {
@@ -124,7 +143,7 @@ const Game = (props) => {
             </div>
             <br/>
             <br/>
-            <button onClick={handleClickStartBtn} id="start-button">
+            <button style={btnPositiveStyle} onClick={handleClickStartBtn} id="start-button">
                 Начать
             </button>
             <br/>
@@ -149,16 +168,18 @@ const Game = (props) => {
                 </form>
             </div>
             <br/>
-            <button onClick={handleSubmitBtnClick} id="submit-btn" style={{display: "none"}}>
-                Submit
-            </button>
+            <div style={{display: "none"}} id="submit-btn">
+                <button onClick={handleSubmitBtnClick} style={btnPositiveStyle}>
+                    Submit
+                </button>
+            </div>
             <div id="back-btn" style={{display: "none"}}>
-                <button onClick={() => window.location.assign("/menu/" + playerId)}>
-                    Назад
+                <button style={btnPositiveStyle} onClick={() => window.location.assign("/game/" + playerId)}>
+                    Играть снова
                 </button>
                 <br/>
-                <button onClick={() => window.location.assign("/game/" + playerId)}>
-                    Играть снова
+                <button style={btnNegativeStyle} onClick={() => window.location.assign("/menu/" + playerId)}>
+                    Назад
                 </button>
             </div>
         </div>

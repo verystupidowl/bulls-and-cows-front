@@ -13,7 +13,7 @@ const Statistic = (props) => {
         textDecoration: "none",
         padding: ".2em 1em calc(.2em + 3px)",
         borderRadius: "3px",
-        background: "rgb(64,199,129)",
+        background: "rgb(199,64,64)"
     };
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const Statistic = (props) => {
                 <h2>{player.name}, у тебя еще нет игр</h2>
                 <br/>
                 <br/>
-                <button onClick={() => window.location.assign("/menu/" + id)}>
+                <button style={btnStyle} onClick={() => window.location.assign("/menu/" + id)}>
                     В меню
                 </button>
             </div>
@@ -45,7 +45,7 @@ const Statistic = (props) => {
             <h2>{player.name}, твоя статистика:</h2>
             <br/>
             <br/>
-            <p>Твои игры:</p>
+            <h2>Твои игры:</h2>
             {games?.map(game => (
                 <div key={game.id}>
                     {game.steps.length > 0 ?
@@ -61,6 +61,7 @@ const Statistic = (props) => {
                     }
                 </div>
             ))}
+            <br/>
             <button style={btnStyle} onClick={() => window.location.assign("/menu/" + id)}>
                 В меню
             </button>
