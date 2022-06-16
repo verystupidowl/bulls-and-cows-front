@@ -48,7 +48,7 @@ const Game = (props) => {
 
 
     useEffect(() => {
-        fetch(URL + "getTimer" + playerId)
+        fetch(URL + "getLimit" + playerId)
             .then(res => res.json().then(result => setLimitation(result))).then(() => {
             if (isStarted && parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
                 const submitBtn = document.getElementById('submit-btn');
