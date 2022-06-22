@@ -86,15 +86,15 @@ const Game = (props) => {
     };
 
     const millisecondsToMinuteAndSeconds = (millis) => {
-        if (parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
-            if (game.limitation === 'time') {
-                let minutes = Math.floor(millis / 60000);
-                let seconds = ((millis % 60000) / 1000).toFixed(0);
-                return 'Осталось: ' + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-            } else if (game.limitation === 'steps') {
-                return 'Осталось: ' + millis + ' попыток';
-            }
-        } else return '';
+        if (game.limitation === 'TIME') {
+            let minutes = Math.floor(millis / 60000);
+            let seconds = ((millis % 60000) / 1000).toFixed(0);
+            return 'Осталось: ' + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+        } else if (game.limitation === 'STEPS') {
+            return 'Осталось: ' + millis + ' попыток';
+        } else if (game.limitation === 'WITHOUT') {
+            return '';
+        }
     };
 
     const handleSubmitBtnClick = (event) => {

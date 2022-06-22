@@ -42,9 +42,9 @@ const Statistic = (props) => {
 
     const getLimitationNames = (limitation) => {
         switch (limitation) {
-            case "time":
+            case "TIME":
                 return 'по времени';
-            case "steps":
+            case "STEPS":
                 return 'по попыткам';
             default:
                 return 'без ограничений';
