@@ -40,6 +40,17 @@ const Statistic = (props) => {
         )
     }
 
+    const getLimitationNames = (limitation) => {
+        switch (limitation) {
+            case "time":
+                return 'по времени';
+            case "steps":
+                return 'по попыткам';
+            default:
+                return 'без ограничений';
+        }
+    }
+
     return (
         <div>
             <h2>{player.name}, твоя статистика:</h2>
@@ -54,7 +65,8 @@ const Statistic = (props) => {
                             Попыток: {game.steps.length};
                             Правильный ответ
                             был: {game.rightAnswer};
-                            Ограничение: {game.limitation}
+                            Ограничение: {getLimitationNames(game.limitation)};
+                            Угадал: {parseInt(game.isGuessed) === 1 ? 'да' : 'нет'}
                             <br/>
                         </div>
                         : ''
