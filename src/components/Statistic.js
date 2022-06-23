@@ -66,7 +66,7 @@ const Statistic = (props) => {
                             Правильный ответ
                             был: {game.rightAnswer};
                             Ограничение: {getLimitationNames(game.limitation)};
-                            Угадал: {parseInt(game.isGuessed) === 1 ? 'да' : 'нет'}
+                            Угадано: {parseInt(game.isGuessed) === 1 ? 'да' : 'нет'}
                             <br/>
                         </div>
                         : ''
