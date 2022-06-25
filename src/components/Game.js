@@ -148,7 +148,7 @@ const Game = (props) => {
             </button>
             <br/>
             {game.steps?.map(step => <div key={step.id}>
-                <h2 id='is-right'>
+                <h2 id='bulls-and-cows-count'>
                     {i++ + ') Быки: ' + step.bulls + ' Коровы: ' + step.cows + ', твой ответ: ' + step.answer}
                 </h2>
             </div>)}
