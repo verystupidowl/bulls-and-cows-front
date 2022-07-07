@@ -30,7 +30,7 @@ const Login = () => {
     const handleClick = (event) => {
         event.preventDefault();
         const player = {name};
-        console.log(player)
+        console.log(player);
         fetch(
             URL + "addPlayer", {
                 method: "POST",
@@ -39,11 +39,11 @@ const Login = () => {
             }
         ).then(res => res.json()
             .then(result => {
-                console.log(result)
-                window.location.assign("menu/" + result.id)
+                console.log(result);
+                window.location.assign("menu/" + result.id);
             })
         )
-    }
+    };
     return (
         <div className="Login">
             <h1 style={{color: "blue"}}>Login</h1>

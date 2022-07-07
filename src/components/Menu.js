@@ -19,7 +19,7 @@ const Menu = (props) => {
             .then(res => res.json()
                 .then(result => setPlayer(result))
             ).then(() => console.log(player))
-    })
+    });
 
     return (
         <div>

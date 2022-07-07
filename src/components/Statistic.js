@@ -25,7 +25,7 @@ const Statistic = (props) => {
         let minutes = Math.floor(millis / 60000);
         let seconds = ((millis % 60000) / 1000).toFixed(0);
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    }
+    };
 
     if (player.games?.length === 0) {
         return (
@@ -49,7 +49,7 @@ const Statistic = (props) => {
             default:
                 return 'без ограничений';
         }
-    }
+    };
 
     return (
         <div>

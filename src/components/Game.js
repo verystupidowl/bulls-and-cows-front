@@ -115,21 +115,21 @@ const Game = (props) => {
                 if ((parseInt(result.isGuessed)) === 1) {
                     submitBtn.style.display = "none";
                     backBtn.style.display = "inline";
-                    input.style.display = "none"
+                    input.style.display = "none";
                 }
                 trueOrFalse.style.display = "inline";
             }))
         } else
-            console.log("nope")
-    }
+            console.log("nope");
+    };
 
     const errorChecker = () => {
         if (parseInt(answer).toString().length === 4) {
             return '';
         } else {
-            return 'Вы можете ввести только четырёхзначное число, которое не начинается на 0'
+            return 'Вы можете ввести только четырёхзначное число, которое не начинается на 0';
         }
-    }
+    };
 
     return (
         <div>
