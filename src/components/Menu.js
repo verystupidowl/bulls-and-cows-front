@@ -15,6 +15,15 @@ const Menu = (props) => {
         background: "rgb(64,199,129)",
     };
 
+    const btnNegativeStyle = {
+        fontWeight: "700",
+        color: "white",
+        textDecoration: "none",
+        padding: ".2em 1em calc(.2em + 3px)",
+        borderRadius: "3px",
+        background: "rgb(199,64,64)",
+    };
+
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
             .then(res => {
@@ -47,7 +56,7 @@ const Menu = (props) => {
                 Статистика
             </button>
             <br/>
-            <button style={btnStyle} onClick={() => window.location.assign("/login")}>
+            <button style={btnNegativeStyle} onClick={() => window.location.assign("/login")}>
                 Выход
             </button>
         </div>

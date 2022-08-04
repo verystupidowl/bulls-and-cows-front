@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 const Login = () => {
     const [name, setName] = useState('');
 
@@ -44,11 +43,13 @@ const Login = () => {
             })
         )
     };
+
     return (
         <div className="Login">
             <h1 style={{color: "blue"}}>Login</h1>
             <form noValidate autoComplete="off">
-                <input value={name} style={inputStyle} onChange={event => setName(event.target.value)}/>
+                <input value={name} style={inputStyle} placeholder={'Введите имя'}
+                       onChange={event => setName(event.target.value)}/>
                 <br/>
                 <br/>
                 <button style={btnStyle} onClick={handleClick}>
