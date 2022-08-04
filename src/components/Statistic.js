@@ -5,6 +5,7 @@ const Statistic = (props) => {
     const id = props.match.params.id;
     const URL = "http://localhost:8080/game/";
     const [player, setPlayer] = useState('');
+    const [error, setError] = useState('');
     let i = 1;
 
     const btnStyle = {
@@ -18,13 +19,17 @@ const Statistic = (props) => {
 
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
-            .then(res => res.json().then(result => {
-                console.log(result)
-                setPlayer(result)
-            }))
-            // .then(() => console.log(player))
+            .then(res => {
+                if (res.status === 200) {
+                    res.json().then(result => setPlayer(result));
+                } else {
+                    res.json().then(result => setError(result));
+                }
+            }).then(() => console.log(player))
     }, [id, player]);
+
     const games = player.games;
+
     const millisecondsToMinuteAndSeconds = (millis) => {
         let minutes = Math.floor(millis / 60000);
         let seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -54,6 +59,14 @@ const Statistic = (props) => {
                 return 'без ограничений';
         }
     };
+
+    if (error) {
+        return (
+            <div>
+                {error.message}
+            </div>
+        )
+    }
 
     return (
         <div>

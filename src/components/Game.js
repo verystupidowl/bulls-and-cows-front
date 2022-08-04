@@ -127,8 +127,7 @@ const Game = (props) => {
                 }
                 trueOrFalse.style.display = "inline";
             }))
-        } else
-            console.log("nope");
+        }
     };
 
     const errorChecker = () => {
