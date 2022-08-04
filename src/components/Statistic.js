@@ -18,7 +18,11 @@ const Statistic = (props) => {
 
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
-            .then(res => res.json().then(result => setPlayer(result))).then(() => console.log(player))
+            .then(res => res.json().then(result => {
+                console.log(result)
+                setPlayer(result)
+            }))
+            // .then(() => console.log(player))
     }, [id, player]);
     const games = player.games;
     const millisecondsToMinuteAndSeconds = (millis) => {

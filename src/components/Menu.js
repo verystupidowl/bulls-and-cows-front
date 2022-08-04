@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 const Menu = (props) => {
     const id = props.match.params.id;
     const [player, setPlayer] = useState('');
+    const [error, setError] = useState('');
     const URL = "http://localhost:8080/game/";
 
     const btnStyle = {
@@ -16,10 +17,23 @@ const Menu = (props) => {
 
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
-            .then(res => res.json()
-                .then(result => setPlayer(result))
+            .then(res => {
+                    if (res.status === 200) {
+                        res.json().then(result => setPlayer(result));
+                    } else {
+                        res.json().then(result => setError(result));
+                    }
+                }
             ).then(() => console.log(player))
     });
+
+    if (error) {
+        return (
+            <div>
+                {error.message}
+            </div>
+        )
+    }
 
     return (
         <div>

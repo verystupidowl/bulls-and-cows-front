@@ -9,6 +9,7 @@ const Game = (props) => {
     const playerId = props.match.params.id;
     const id = game.id;
     const isGuessed = game.isGuessed;
+    const [errorMsg, setErrorMsg] = useState('');
     let [limitation, setLimitation] = useState('');
     let i = 1;
     let cows = 0;
@@ -49,24 +50,31 @@ const Game = (props) => {
 
     useEffect(() => {
         fetch(URL + "getLimit" + playerId)
-            .then(res => res.json().then(result => setLimitation(result))).then(() => {
-            if (isStarted && parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
-                const submitBtn = document.getElementById('submit-btn');
-                const backBtn = document.getElementById('back-btn');
-                if (limitation >= 0 && parseInt(isGuessed) === 0) {
-                    if (submitBtn && backBtn) {
-                        submitBtn.style.display = "inline";
-                        backBtn.style.display = "none";
-                    }
-                    return '';
+            .then(res => {
+                if (res.status === 200) {
+                    res.json().then(result => setLimitation(result));
                 } else {
-                    if (submitBtn && backBtn) {
-                        submitBtn.style.display = "none";
-                        backBtn.style.display = "inline";
+                    res.json().then(result => setErrorMsg(result));
+                }
+            }).then(() => {
+                if (isStarted && parseInt(limitation) !== -2 && parseInt(limitation) !== -3 && parseInt(limitation) !== -100) {
+                    const submitBtn = document.getElementById('submit-btn');
+                    const backBtn = document.getElementById('back-btn');
+                    if (limitation >= 0 && parseInt(isGuessed) === 0) {
+                        if (submitBtn && backBtn) {
+                            submitBtn.style.display = "inline";
+                            backBtn.style.display = "none";
+                        }
+                        return '';
+                    } else {
+                        if (submitBtn && backBtn) {
+                            submitBtn.style.display = "none";
+                            backBtn.style.display = "inline";
+                        }
                     }
                 }
             }
-        });
+        );
     });
 
     const handleClickStartBtn = () => {
@@ -130,6 +138,14 @@ const Game = (props) => {
             return 'Вы можете ввести только четырёхзначное число, которое не начинается на 0';
         }
     };
+
+    if (errorMsg) {
+        return (
+            <div>
+                {errorMsg.message}
+            </div>
+        )
+    }
 
     return (
         <div>
