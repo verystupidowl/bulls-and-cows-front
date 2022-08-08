@@ -12,7 +12,7 @@ const Menu = (props) => {
         textDecoration: "none",
         padding: ".2em 1em calc(.2em + 3px)",
         borderRadius: "3px",
-        background: "rgb(64,199,129)",
+        background: "rgb(0,0,0,30%)"
     };
 
     const btnNegativeStyle = {
