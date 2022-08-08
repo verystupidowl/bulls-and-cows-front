@@ -22,8 +22,8 @@ const Login = () => {
         color: "white",
         textDecoration: "none",
         padding: ".2em 1em calc(.2em + 3px)",
-        borderRadius: "3px",
-        background: "rgb(64,199,129)",
+        borderRadius: "1px",
+        background: "rgb(0,0,0,30%)",
     };
 
     const handleClick = (event) => {
@@ -46,7 +46,7 @@ const Login = () => {
 
     return (
         <div className="Login">
-            <h1 style={{color: "blue"}}>Login</h1>
+            <p style={{color: "rgb(0,0,0,90%)", fontSize: "2rem"}}>Login</p>
             <form noValidate autoComplete="off">
                 <input value={name} style={inputStyle} placeholder={'Введите имя'}
                        onChange={event => setName(event.target.value)}/>
