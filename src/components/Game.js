@@ -141,7 +141,11 @@ const Game = (props) => {
     if (errorMsg) {
         return (
             <div>
-                {errorMsg.message}
+                <h4 style={{color:"red"}}>{errorMsg.message}</h4>
+                <br/>
+                <button style={btnNegativeStyle} onClick={() => window.location.assign("/login")}>
+                    Выйти
+                </button>
             </div>
         )
     }

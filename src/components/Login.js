@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 const Login = () => {
     const [name, setName] = useState('');
+    const [error, setError] = useState('');
 
     const URL = "http://localhost:8080/game/";
 
@@ -36,13 +37,39 @@ const Login = () => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(player)
             }
-        ).then(res => res.json()
-            .then(result => {
-                console.log(result);
-                window.location.assign("menu/" + result.id);
-            })
+        ).then(res => {
+            console.log(res)
+                if (res.status === 200) {
+                    res.json()
+                        .then(result => {
+                            console.log(result);
+                            window.location.assign("menu/" + result.id);
+                        });
+                } else {
+                    console.log(res)
+                    res.json().then(result => setError(result));
+                }
+            }
         )
     };
+
+    if (error) {
+        return (
+            <div className="Login">
+                <p style={{color: "rgb(0,0,0,90%)", fontSize: "2rem"}}>Login</p>
+                <form noValidate autoComplete="off">
+                    <input value={name} style={inputStyle} placeholder={'Введите имя'}
+                           onChange={event => setName(event.target.value)}/>
+                    <br/>
+                    <br/>
+                    <h4 style={{color: "red"}}>{error.message}</h4>
+                    <button style={btnStyle} onClick={handleClick}>
+                        Login
+                    </button>
+                </form>
+            </div>
+        )
+    }
 
     return (
         <div className="Login">
