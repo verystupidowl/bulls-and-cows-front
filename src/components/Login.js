@@ -5,7 +5,7 @@ const Login = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState('');
 
-    const URL = "http://localhost:8080/game/";
+    const URL = "http://localhost:8080/login/";
 
     const inputStyle = {
         display: "inline",
