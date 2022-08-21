@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {useEffect} from "react";
+import PositiveBtn from "./PositiveBtn";
+import NegativeBtn from "./NegativeBtn";
 
 const Game = (props) => {
 
@@ -27,24 +29,6 @@ const Game = (props) => {
         backgroundClip: "padding-box",
         border: "1px solid #bdbdbd",
         borderRadius: "0.25rem",
-    };
-
-    const btnPositiveStyle = {
-        fontWeight: "700",
-        color: "white",
-        textDecoration: "none",
-        padding: ".2em 1em calc(.2em + 3px)",
-        borderRadius: "3px",
-        background: "rgb(0,0,0,30%)"
-    };
-
-    const btnNegativeStyle = {
-        fontWeight: "700",
-        color: "white",
-        textDecoration: "none",
-        padding: ".2em 1em calc(.2em + 3px)",
-        borderRadius: "3px",
-        background: "rgb(199,64,64)",
     };
 
 
@@ -141,11 +125,9 @@ const Game = (props) => {
     if (errorMsg) {
         return (
             <div>
-                <h4 style={{color:"red"}}>{errorMsg.message}</h4>
+                <h4 style={{color: "red"}}>{errorMsg.message}</h4>
                 <br/>
-                <button style={btnNegativeStyle} onClick={() => window.location.assign("/login")}>
-                    Выйти
-                </button>
+                <NegativeBtn func={() => window.location.assign("/login")} text="Выйти"/>
             </div>
         )
     }
@@ -153,7 +135,7 @@ const Game = (props) => {
     return (
         <div>
             <div id="tutor">
-                <h2 color="blue">Игра Быки - коровы</h2>
+                <h2 color="blue">Игра "Быки - Коровы"</h2>
                 <h4>Правила простные: </h4>
                 <h4>Компьютер загадывает число из 4 цифр, твоя задача - угадать!</h4>
                 <h4>Как напишешь свой вариант, получишь число быков и коров</h4>
@@ -162,9 +144,9 @@ const Game = (props) => {
             </div>
             <br/>
             <br/>
-            <button style={btnPositiveStyle} onClick={handleClickStartBtn} id="start-button">
-                Начать
-            </button>
+            <div id="start-button">
+                <PositiveBtn func={handleClickStartBtn} text="Начать"/>
+            </div>
             <br/>
             {game.steps?.map(step => <div key={step.id}>
                 <h2 id='bulls-and-cows-count'>
@@ -188,18 +170,12 @@ const Game = (props) => {
             </div>
             <br/>
             <div style={{display: "none"}} id="submit-btn">
-                <button onClick={handleSubmitBtnClick} style={btnPositiveStyle}>
-                    Submit
-                </button>
+                <PositiveBtn func={handleSubmitBtnClick} text="Submit"/>
             </div>
             <div id="back-btn" style={{display: "none"}}>
-                <button style={btnPositiveStyle} onClick={() => window.location.assign("/game/" + playerId)}>
-                    Играть снова
-                </button>
+                <PositiveBtn func={() => window.location.assign("/game/" + playerId)} text="играть снова"/>
                 <br/>
-                <button style={btnNegativeStyle} onClick={() => window.location.assign("/menu/" + playerId)}>
-                    Назад
-                </button>
+                <NegativeBtn func={() => window.location.assign("/menu/" + playerId)} text="Назад"/>
             </div>
         </div>
     );

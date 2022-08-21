@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PositiveBtn from "./PositiveBtn";
 
 const Login = () => {
     const [name, setName] = useState('');
@@ -18,14 +19,6 @@ const Login = () => {
         borderRadius: "0.25rem",
     };
 
-    const btnStyle = {
-        fontWeight: "700",
-        color: "white",
-        textDecoration: "none",
-        padding: ".2em 1em calc(.2em + 3px)",
-        borderRadius: "1px",
-        background: "rgb(0,0,0,30%)",
-    };
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -63,9 +56,7 @@ const Login = () => {
                     <br/>
                     <br/>
                     <h4 style={{color: "red"}}>{error.message}</h4>
-                    <button style={btnStyle} onClick={handleClick}>
-                        Login
-                    </button>
+                    <PositiveBtn func={handleClick} text='Login'/>
                 </form>
             </div>
         )
@@ -79,9 +70,7 @@ const Login = () => {
                        onChange={event => setName(event.target.value)}/>
                 <br/>
                 <br/>
-                <button style={btnStyle} onClick={handleClick}>
-                    Login
-                </button>
+                <PositiveBtn func={handleClick} text='Login'/>
             </form>
         </div>
     );

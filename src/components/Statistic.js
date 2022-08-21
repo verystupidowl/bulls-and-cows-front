@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import PositiveBtn from "./PositiveBtn";
+import NegativeBtn from "./NegativeBtn";
 
 const Statistic = (props) => {
 
@@ -7,15 +9,6 @@ const Statistic = (props) => {
     const [player, setPlayer] = useState('');
     const [error, setError] = useState('');
     let i = 1;
-
-    const btnStyle = {
-        fontWeight: "700",
-        color: "white",
-        textDecoration: "none",
-        padding: ".2em 1em calc(.2em + 3px)",
-        borderRadius: "3px",
-        background: "rgb(199,64,64)"
-    };
 
     useEffect(() => {
         fetch(URL + "getPlayer" + id)
@@ -42,9 +35,7 @@ const Statistic = (props) => {
                 <h2>{player.name}, у тебя еще нет игр</h2>
                 <br/>
                 <br/>
-                <button style={btnStyle} onClick={() => window.location.assign("/menu/" + id)}>
-                    В меню
-                </button>
+                <PositiveBtn func={() => window.location.assign("/menu/" + id)} text="В меню"/>
             </div>
         )
     }
@@ -63,7 +54,9 @@ const Statistic = (props) => {
     if (error) {
         return (
             <div>
-                {error.message}
+                <h4 style={{color:"red"}}>{error.message}</h4>
+                <br/>
+                <PositiveBtn func={() => window.location.assign("/login")} text="Выйти"/>
             </div>
         )
     }
@@ -91,9 +84,7 @@ const Statistic = (props) => {
                 </div>
             ))}
             <br/>
-            <button style={btnStyle} onClick={() => window.location.assign("/menu/" + id)}>
-                В меню
-            </button>
+            <NegativeBtn func={() => window.location.assign("/menu/" + id)} text="В меню"/>
         </div>
     );
 };
