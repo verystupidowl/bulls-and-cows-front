@@ -31,7 +31,7 @@ const Login = () => {
                 body: JSON.stringify(player)
             }
         ).then(res => {
-            console.log(res)
+                console.log(res);
                 if (res.status === 200) {
                     res.json()
                         .then(result => {
@@ -39,11 +39,11 @@ const Login = () => {
                             window.location.assign("menu/" + result.id);
                         });
                 } else {
-                    console.log(res)
+                    console.log(res);
                     res.json().then(result => setError(result));
                 }
             }
-        )
+        );
     };
 
     if (error) {
@@ -56,10 +56,10 @@ const Login = () => {
                     <br/>
                     <br/>
                     <h4 style={{color: "red"}}>{error.message}</h4>
-                    <PositiveBtn func={handleClick} text='Login'/>
+                    <PositiveBtn func={handleClick} text="Login"/>
                 </form>
             </div>
-        )
+        );
     }
 
     return (
@@ -70,7 +70,7 @@ const Login = () => {
                        onChange={event => setName(event.target.value)}/>
                 <br/>
                 <br/>
-                <PositiveBtn func={handleClick} text='Login'/>
+                <PositiveBtn func={handleClick} text="Login"/>
             </form>
         </div>
     );

@@ -101,8 +101,8 @@ const Game = (props) => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(step)
             }).then(res => res.json().then(result => {
-                console.log(result)
-                setGame(result)
+                console.log(result);
+                setGame(result);
                 const trueOrFalse = document.getElementById('true-or-false');
                 if ((parseInt(result.isGuessed)) === 1) {
                     submitBtn.style.display = "none";
@@ -110,7 +110,7 @@ const Game = (props) => {
                     input.style.display = "none";
                 }
                 trueOrFalse.style.display = "inline";
-            }))
+            }));
         }
     };
 
@@ -129,7 +129,7 @@ const Game = (props) => {
                 <br/>
                 <NegativeBtn func={() => window.location.assign("/login")} text="Выйти"/>
             </div>
-        )
+        );
     }
 
     return (
@@ -149,7 +149,7 @@ const Game = (props) => {
             </div>
             <br/>
             {game.steps?.map(step => <div key={step.id}>
-                <h2 id='bulls-and-cows-count'>
+                <h2 id="bulls-and-cows-count">
                     {i++ + ') Быки: ' + step.bulls + ' Коровы: ' + step.cows + ', твой ответ: ' + step.answer}
                 </h2>
             </div>)}
@@ -179,6 +179,6 @@ const Game = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default Game;

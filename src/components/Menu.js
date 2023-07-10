@@ -17,16 +17,16 @@ const Menu = (props) => {
                         res.json().then(result => setError(result));
                     }
                 }
-            ).then(() => console.log(player))
+            ).then(() => console.log(player));
     });
 
     if (error) {
         return (
             <div>
-                <h4 style={{color:"red"}}>{error.message}</h4>
+                <h4 style={{color: "red"}}>{error.message}</h4>
                 <NegativeBtn func={() => window.location.assign("/login")} text="Выйти"/>
             </div>
-        )
+        );
     }
 
     return (

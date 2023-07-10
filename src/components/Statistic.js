@@ -18,7 +18,7 @@ const Statistic = (props) => {
                 } else {
                     res.json().then(result => setError(result));
                 }
-            }).then(() => console.log(player))
+            }).then(() => console.log(player));
     }, [id, player]);
 
     const games = player.games;
@@ -37,7 +37,7 @@ const Statistic = (props) => {
                 <br/>
                 <PositiveBtn func={() => window.location.assign("/menu/" + id)} text="В меню"/>
             </div>
-        )
+        );
     }
 
     const getLimitationNames = (limitation) => {
@@ -54,11 +54,11 @@ const Statistic = (props) => {
     if (error) {
         return (
             <div>
-                <h4 style={{color:"red"}}>{error.message}</h4>
+                <h4 style={{color: "red"}}>{error.message}</h4>
                 <br/>
                 <PositiveBtn func={() => window.location.assign("/login")} text="Выйти"/>
             </div>
-        )
+        );
     }
 
     return (
