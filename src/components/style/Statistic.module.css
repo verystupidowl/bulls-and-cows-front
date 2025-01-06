@@ -1,0 +1,30 @@
+.statistic-conteiner {
+    padding: '20px';
+    font-family: 'Arial, sans-serif';
+}
+
+.heading {
+    font-size: '24px';
+    color: '#333';
+}
+
+.sub-heading {
+    font-size: '20px';
+    color: '#666';
+}
+
+.error-text {
+    color: 'red';
+    font-size: '18px';
+}
+
+.game-info {
+    background-color: '#f4f4f4';
+    padding: '10px';
+    margin: '10px 0';
+    border-radius: '5px';
+}
+
+.button {
+    margin-top: '20px';
+}

@@ -1,0 +1,48 @@
+.game-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .tutor {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .start-button {
+    margin-top: 20px;
+  }
+  
+  .step {
+    margin-top: 10px;
+  }
+  
+  .result-message {
+    font-size: 1.5rem;
+    color: green;
+  }
+  
+  .input-container {
+    margin-top: 20px;
+  }
+  
+  .answer-input {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .submit-btn, .back-btn {
+    margin-top: 20px;
+  }
+  
+  .error-checker {
+    color: red;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .game-status {
+    font-size: 1.5rem;
+    color: blue;
+  }
