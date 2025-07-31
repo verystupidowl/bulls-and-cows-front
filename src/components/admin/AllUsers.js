@@ -35,7 +35,7 @@ const AllUsers = () => {
       <div className={styles.statisticContainer}>
         <h4 className={styles.errorMessage}>{error.message}</h4>
         <NegativeBtn
-          func={() => window.location.assign('/menu/' + id)}
+          func={() => window.location.assign('/menu')}
           text="В меню"
           className={styles.button}
         />
@@ -56,7 +56,7 @@ const AllUsers = () => {
         </div>
       ))}
       <NegativeBtn
-        func={() => window.location.assign('/menu/' + id)}
+        func={() => window.location.assign('/menu')}
         text="В меню"
         className={styles.button}
       />

@@ -132,7 +132,7 @@ const Game = (props) => {
         {isGuessed
           ? `ВЕРНО! Вы выиграли за ${game.steps.length} попыток!`
           : isEnded
-          ? `Вы не угадали, правильный ответ ${game.rightAnswer}`
+          ? `Вы не угадали, правильный ответ ${game?.rightAnswer}`
           : `Неверно! Попытка № ${i}`}
       </h2>
 

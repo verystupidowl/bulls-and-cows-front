@@ -39,7 +39,7 @@ const SignUp = () => {
         const result = await res.json();
         localStorage.setItem('token', result.token);
         const id = extractFromToken(result.token, 'ID');
-        window.location.assign(`menu/${id}`);
+        window.location.assign(`menu`);
       } else {
         const result = await res.json();
         setError(result || [{ field: '', message: 'Ошибка регистрации' }]);
